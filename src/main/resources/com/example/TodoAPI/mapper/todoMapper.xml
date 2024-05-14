@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.TodoAPI.mapper.TodoMapper">
+	<insert id="addTodo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO todos (title, status, detail) VALUES (#{todo.title}, #{todo.status}, #{todo.detail})
+	</insert>
+	<select id="showAll" resultType="com.example.TodoAPI.entity.Todo">
+		SELECT id, title, status, detail, create_at, update_at FROM todos
+	</select>
+	<select id="findById" resultType="com.example.TodoAPI.entity.Todo">
+		SELECT id, title, status, detail, create_at, update_at FROM todos WHERE id = #{id}
+	</select>
+	<delete id="deleteTodo">
+		DELETE FROM todos WHERE id = #{id}
+	</delete>
+	<update id="updateTodo">
+		UPDATE todos
+		SET title = #{todo.title}, status = #{todo.status}, detail = #{todo.detail}
+		WHERE id = #{id}
+	</update>
+	<select id="filteredByTitle" resultType="com.example.TodoAPI.entity.Todo">
+		SELECT id, title, status, detail, create_at, update_at FROM todos WHERE title = #{title}
+	</select>
+	<select id="filteredByStatus" resultType="com.example.TodoAPI.entity.Todo">
+		SELECT id, title, status, detail, create_at, update_at FROM todos WHERE status = #{status}
+	</select>
+	<select id="sortByStatus" resultType="com.example.TodoAPI.entity.Todo">
+		SELECT id, title, status, detail, create_at, update_at FROM todos ORDER BY status
+	</select>
+</mapper>
